@@ -1,7 +1,7 @@
 <h2>List of events (excluding conferences)</h2>
 
 <div class="coin" *ngFor="let coin of coinsCombined$ | async" [attr.id]="coin.coinData.id" #coin>
-    <h3>{{coin.coinData.name}}</h3>
+    <h3>{{coin.coinData.name}} - {{coin.coinData.symbol}}</h3>
     <div *ngFor="let event of coin.eventData">
       <p>{{event.date}}: {{event.name}}</p>
     </div>
