@@ -55,8 +55,6 @@ export class CoinsService {
         ).subscribe(({ postData, userByPostData })=> console.log(postData, userByPostData));*/
 
   init() {
-    this.assignNewTickerCoin("btc-bitcoin");
-
     this.tickers$ = this.fullTickerApiUrl
       .pipe(
         distinctUntilChanged(),
