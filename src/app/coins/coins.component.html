@@ -1,5 +1,7 @@
+<h2>List of coins</h2>
+
 <div class="coin" *ngFor="let coin of coins$ | async" [attr.id]="coin.id" #coin>
-  <h2>{{ coin.name }}</h2>
+  <h3>{{ coin.name }}</h3>
   <p>Symbol: {{ coin.symbol }}</p>
   <p>Rank: {{ coin.rank }}</p>
 </div>

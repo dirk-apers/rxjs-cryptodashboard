@@ -8,10 +8,11 @@ registerLocaleData(localeNl);
 
 import { CoinsComponent } from './coins/coins.component';
 import { TickersComponent } from './tickers/tickers.component';
+import { EventsComponent } from './events/events.component';
 import { CoinsService } from './coins.service';
 
 @NgModule({
-  declarations: [AppComponent, CoinsComponent, TickersComponent],
+  declarations: [AppComponent, CoinsComponent, TickersComponent, EventsComponent],
   imports: [BrowserModule, HttpClientModule, BrowserModule],
   providers: [{ provide: LOCALE_ID, useValue: 'nl-BE'}, CoinsService],
   bootstrap: [AppComponent]

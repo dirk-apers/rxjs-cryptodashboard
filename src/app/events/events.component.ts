@@ -3,22 +3,21 @@ import { Component, AfterViewInit, ViewChildren, ElementRef, QueryList, Directiv
 import { Observable, fromEvent } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { Coin, CombinedCoins, CoinsService } from '../coins.service';
+import { CombinedCoins, CoinsService } from '../coins.service';
 
 
 @Component({
-  selector: 'app-coins',
-  templateUrl: './coins.component.html',
-  styleUrls: ['./coins.component.css']
+  selector: 'app-events',
+  templateUrl: './events.component.html',
+  styleUrls: ['./events.component.css']
 })
 
-export class CoinsComponent implements AfterViewInit {
+export class EventsComponent implements AfterViewInit {
   @ViewChildren("coin") coinViewList: QueryList<ElementRef>;
   coins:any[];
 
   constructor(private coinsService: CoinsService) {}
 
-  readonly coins$: Observable<Coin[]> = this.coinsService.coins$;
   readonly coinsCombined$ : Observable<CombinedCoins[]> = this.coinsService.coinsCombined$;
 
   ngAfterViewInit() {

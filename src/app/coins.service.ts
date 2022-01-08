@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, ReplaySubject } from 'rxjs';
-import {filter, map, shareReplay, tap, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {filter, map, shareReplay, tap, distinctUntilChanged, switchMap,      mergeAll, toArray, mergeMap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -35,24 +35,28 @@ export class CoinsService {
       shareReplay({ bufferSize: 1, refCount: true })
     );
 
-    readonly coinsCombined$: Observable<any> = this.httpClient
+    readonly coinsCombined$: Observable<CombinedCoins[]> = this.httpClient
       .get<Coin[]>(this.coinApiUrl)
       .pipe(
-        tap(console.log),
-        switchMap((coinData: Coin[]) =>
+        map((allCoins: Coin[]) =>
+              allCoins.filter(
+                (coin: Coin) =>
+                  !coin.is_new && coin.rank > 0 && coin.rank < 10
+              )
+        ),
+        mergeAll(),
+        mergeMap(coinData =>
           this.httpClient
-          .get<Coin[]>(this.coinApiUrl + coinData + '/events')
+          .get<Coin[]>(this.coinApiUrl + coinData.id + '/events')
           .pipe(
-            map(eventData => ({coinData, eventData}))
-           ),
-        )
+            map(eventData =>
+                  eventData.filter((event: Event) => !event.is_conference)
+            ),
+            map(eventData => ({coinData, eventData})
+           )),
+        ),
+        toArray()
       );
-
-   /*     this.postsService.getPostData(postId).switchMap(
-          postData => this.getUserByPostData(postData).map(
-            userByPostData => ({ postData, userByPostData })
-          )
-        ).subscribe(({ postData, userByPostData })=> console.log(postData, userByPostData));*/
 
   init() {
     this.tickers$ = this.fullTickerApiUrl
@@ -77,6 +81,7 @@ export class CoinsService {
 }
 
 export type Coin = Record<string, string | number | boolean>;
+export type Event = Record<string, string | number | boolean>;
 export type TickerData = Record<string, string | number | boolean>;
 
 export interface Ticker {
@@ -84,4 +89,9 @@ export interface Ticker {
   price: number;
   volume_24h: number;
   market_cap: number;
+}
+
+export interface CombinedCoins {
+  coinData: Coin;
+  eventData: Event[];
 }
