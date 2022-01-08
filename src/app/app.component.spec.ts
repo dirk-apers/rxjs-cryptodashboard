@@ -14,10 +14,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'rxjs-no-subscribe'`, () => {
+  it(`should have as title 'rxjs-cryptodashboard'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('rxjs-no-subscribe');
+    expect(app.title).toEqual('rxjs-cryptodashboard');
   });
 
   it('should render title', () => {
@@ -26,6 +26,6 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(
       compiled.querySelector('.content span')?.textContent
-    ).toContain('rxjs-no-subscribe app is running!');
+    ).toContain('rxjs-cryptodashboard app is running!');
   });
 });

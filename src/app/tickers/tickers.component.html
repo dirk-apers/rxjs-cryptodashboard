@@ -1,0 +1,11 @@
+<h1>Conversions for {{tickerApiCoin$ | async}} </h1>
+
+<article *ngFor="let ticker of tickers$ | async">
+  <h2>{{ ticker.currency }}</h2>
+  <p>Price: {{ ticker.price | number:'1.0-2':'nl-BE' }} {{ ticker.currency }}</p>
+  <p>Volume 24h: {{ ticker.volume_24h | number:'1.0-0':'nl-BE' }} {{ ticker.currency }}</p>
+  <p>Market cap: {{ ticker.market_cap | number:'1.0-0':'nl-BE' }} {{ ticker.currency }}</p>
+</article>
+
+
+
