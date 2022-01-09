@@ -18,7 +18,7 @@ export class EventsComponent implements AfterViewInit {
 
   constructor(private coinsService: CoinsService) {}
 
-  readonly coinsCombined$ : Observable<CombinedCoins[]> = this.coinsService.coinsCombined$;
+  readonly events$ : Observable<CombinedCoins[]> = this.coinsService.events$;
 
   ngAfterViewInit() {
     this.coinViewList.changes.subscribe(() => this.updateCoins());

@@ -35,7 +35,7 @@ export class CoinsService {
       shareReplay({ bufferSize: 1, refCount: true })
     );
 
-    readonly coinsCombined$: Observable<CombinedCoins[]> = this.httpClient
+    readonly events$: Observable<CombinedCoins[]> = this.httpClient
       .get<Coin[]>(this.coinApiUrl)
       .pipe(
         map((allCoins: Coin[]) =>

@@ -19,7 +19,6 @@ export class CoinsComponent implements AfterViewInit {
   constructor(private coinsService: CoinsService) {}
 
   readonly coins$: Observable<Coin[]> = this.coinsService.coins$;
-  readonly coinsCombined$ : Observable<CombinedCoins[]> = this.coinsService.coinsCombined$;
 
   ngAfterViewInit() {
     this.coinViewList.changes.subscribe(() => this.updateCoins());
