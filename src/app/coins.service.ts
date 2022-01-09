@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, ReplaySubject } from 'rxjs';
-import {filter, map, shareReplay, tap, distinctUntilChanged, switchMap,      mergeAll, toArray, mergeMap } from 'rxjs/operators';
+import {filter, map, shareReplay, tap, distinctUntilChanged, switchMap, mergeAll, toArray, mergeMap } from 'rxjs/operators';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoinsService {
-  readonly coinApiUrl: string = "https://api.coinpaprika.com/v1/coins/";
+
   readonly tickerApiUrl: string = "https://api.coinpaprika.com/v1/tickers/";
   readonly tickerApiParams: string = "?quotes=USD,EUR";
 
@@ -21,6 +21,8 @@ export class CoinsService {
   }
 
   tickers$: Observable<Ticker[]>;
+
+  readonly coinApiUrl: string = "https://api.coinpaprika.com/v1/coins/";
 
   readonly coins$: Observable<Coin[]> = this.httpClient
     .get<Coin[]>(this.coinApiUrl)
