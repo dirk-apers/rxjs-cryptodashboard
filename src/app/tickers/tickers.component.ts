@@ -12,7 +12,7 @@ import { Ticker, CoinsService } from '../coins.service';
   styleUrls: ['./tickers.component.css']
 })
 
-export class TickersComponent implements AfterViewInit {
+export class TickersComponent {
   constructor(private coinsService: CoinsService) {}
 
   readonly tickers$: Observable<Ticker[]> = this.coinsService.tickers$;
