@@ -29,19 +29,19 @@ export class CoinsService {
       map((allCoins: Coin[]) =>
         allCoins.filter(
           (coin: Coin) =>
-            !coin.is_new && coin.rank > 0 && coin.rank < 10
+            !coin.is_new && coin.rank > 0 && coin.rank < 3
         )
       ),
       shareReplay({ bufferSize: 1, refCount: true })
     );
 
-    readonly events$: Observable<CombinedCoins[]> = this.httpClient
+    readonly events$: Observable<Events[]> = this.httpClient
       .get<Coin[]>(this.coinApiUrl)
       .pipe(
         map((allCoins: Coin[]) =>
               allCoins.filter(
                 (coin: Coin) =>
-                  !coin.is_new && coin.rank > 0 && coin.rank < 10
+                  !coin.is_new && coin.rank > 0 && coin.rank < 3
               )
         ),
         mergeAll(),
@@ -91,7 +91,7 @@ export interface Ticker {
   market_cap: number;
 }
 
-export interface CombinedCoins {
+export interface Events {
   coinData: Coin;
   eventData: Event[];
 }
